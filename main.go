@@ -1,30 +1,33 @@
 package main
 
 import (
-	Modify "Modify/Functions" // Import the Modify package
+	Modify "Modify/Functions"
 	"fmt"
-	"io/ioutil"
-	"log"
 	"os"
 )
 
 func main() {
-	// Open the file
-	file, err := os.Open(os.Args[1])
-	if err != nil {
-		log.Fatalf("failed to open file: %v", err)
-	}
-	defer file.Close()
-
-	// Read the file
-	b, err := ioutil.ReadAll(file)
-	if err != nil {
-		log.Fatalf("failed to read file: %v", err)
+	if len(os.Args) != 2 {
+		fmt.Println("Usage: go run . <filename>")
+		return
 	}
 
-	// Process the file contents
-	content := string(b)
+	farm, err := Modify.ParseInput(os.Args[1])
+	if err != nil {
+		fmt.Printf("ERROR: %v\n", err)
+		return
+	}
 
-	send := Modify.All(content)
-	fmt.Println(send)
+	// Print the input
+	Modify.PrintInput(farm)
+
+	// Find the shortest path
+	path, err := Modify.FindShortestPath(farm)
+	if err != nil {
+		fmt.Printf("ERROR: %v\n", err)
+		return
+	}
+
+	// Move ants through the path
+	Modify.MoveAnts(farm, path)
 }
