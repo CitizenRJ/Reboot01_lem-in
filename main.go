@@ -23,8 +23,8 @@ func main() {
 	fmt.Println()
 
 	/*
-		here is checking if there is a ##start
-		and a ##end before actually doing anything else
+		here is checking if the file contains all valid information before starting such as
+		Number of ants, ##start/##end, Room and coords and finally the links
 	*/
 	farm, err := Modify.ParseInput(os.Args[1])
 	if err != nil {
@@ -32,7 +32,8 @@ func main() {
 		return
 	}
 
-	// Finds the shortest path
+	// After everything is done and all valid info are stored in the AntFarm struct 
+	// It then finds the shortest path
 	path, err := Modify.FindShortestPath(farm)
 	if err != nil {
 		fmt.Printf("ERROR: %v\n", err)
