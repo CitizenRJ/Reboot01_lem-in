@@ -12,29 +12,33 @@ func main() {
 		return
 	}
 
-	txt, err := os.ReadFile(os.Args[1])
+	txt, err := os.ReadFile(os.Args[1]) //Reads the txt file
 	if err != nil {
 		fmt.Printf("ERROR: %v\n", err)
 		return
 	}
 
+	// Print the txt file
+	fmt.Println(string(txt))
+	fmt.Println()
+
+	/*
+		here is checking if there is a ##start
+		and a ##end before actually doing anything else
+	*/
 	farm, err := Modify.ParseInput(os.Args[1])
 	if err != nil {
 		fmt.Printf("ERROR: %v\n", err)
 		return
 	}
 
-	// Print the input
-	fmt.Println(string(txt))
-	fmt.Println()
-
-	// Find the shortest path
+	// Finds the shortest path
 	path, err := Modify.FindShortestPath(farm)
 	if err != nil {
 		fmt.Printf("ERROR: %v\n", err)
 		return
 	}
 
-	// Move ants through the path
+	// Moves ants through the path
 	Modify.MoveAnts(farm, path)
 }

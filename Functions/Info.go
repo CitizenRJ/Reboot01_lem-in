@@ -7,12 +7,12 @@ import (
 )
 
 func ParseRoom(farm *AntFarm, line string, isStart, isEnd bool) error {
-	parts := strings.Fields(line)
-	if len(parts) != 3 {
+	parts := strings.Fields(line) //splits the line by each whitespace
+	if len(parts) != 3 { //if it isnt 3, it means it is not a Room
 		return fmt.Errorf("invalid room format: %s", line)
 	}
-
-	name := parts[0]
+	//otherwise the rooms name
+	name := parts[0] 
 	x, err := strconv.Atoi(parts[1])
 	if err != nil {
 		return fmt.Errorf("invalid x coordinate: %s", parts[1])
@@ -58,27 +58,6 @@ func ParseLink(farm *AntFarm, line string) error {
 
 	return nil
 }
-
-// func PrintInput(farm *AntFarm) {
-// 	fmt.Println(farm.AntCount)
-// 	for _, room := range farm.Rooms {
-// 		prefix := ""
-// 		if room.Name == farm.Start {
-// 			prefix = "##start\n"
-// 		} else if room.Name == farm.End {
-// 			prefix = "##end\n"
-// 		}
-// 		fmt.Printf("%s%s %d %d\n", prefix, room.Name, room.X, room.Y)
-// 	}
-// 	for room, links := range farm.Links {
-// 		for _, link := range links {
-// 			if room < link {
-// 				fmt.Printf("%s-%s\n", room, link)
-// 			}
-// 		}
-// 	}
-// 	fmt.Println()
-// }
 
 func FindShortestPath(farm *AntFarm) ([]string, error) {
 	queue := []string{farm.Start}
