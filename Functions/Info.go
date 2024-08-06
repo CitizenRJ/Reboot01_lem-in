@@ -59,26 +59,26 @@ func ParseLink(farm *AntFarm, line string) error {
 	return nil
 }
 
-func PrintInput(farm *AntFarm) {
-	fmt.Println(farm.AntCount)
-	for _, room := range farm.Rooms {
-		prefix := ""
-		if room.Name == farm.Start {
-			prefix = "##start\n"
-		} else if room.Name == farm.End {
-			prefix = "##end\n"
-		}
-		fmt.Printf("%s%s %d %d\n", prefix, room.Name, room.X, room.Y)
-	}
-	for room, links := range farm.Links {
-		for _, link := range links {
-			if room < link {
-				fmt.Printf("%s-%s\n", room, link)
-			}
-		}
-	}
-	fmt.Println()
-}
+// func PrintInput(farm *AntFarm) {
+// 	fmt.Println(farm.AntCount)
+// 	for _, room := range farm.Rooms {
+// 		prefix := ""
+// 		if room.Name == farm.Start {
+// 			prefix = "##start\n"
+// 		} else if room.Name == farm.End {
+// 			prefix = "##end\n"
+// 		}
+// 		fmt.Printf("%s%s %d %d\n", prefix, room.Name, room.X, room.Y)
+// 	}
+// 	for room, links := range farm.Links {
+// 		for _, link := range links {
+// 			if room < link {
+// 				fmt.Printf("%s-%s\n", room, link)
+// 			}
+// 		}
+// 	}
+// 	fmt.Println()
+// }
 
 func FindShortestPath(farm *AntFarm) ([]string, error) {
 	queue := []string{farm.Start}

@@ -12,6 +12,12 @@ func main() {
 		return
 	}
 
+	txt, err := os.ReadFile(os.Args[1])
+	if err != nil {
+		fmt.Printf("ERROR: %v\n", err)
+		return
+	}
+
 	farm, err := Modify.ParseInput(os.Args[1])
 	if err != nil {
 		fmt.Printf("ERROR: %v\n", err)
@@ -19,7 +25,8 @@ func main() {
 	}
 
 	// Print the input
-	Modify.PrintInput(farm)
+	fmt.Println(string(txt))
+	fmt.Println()
 
 	// Find the shortest path
 	path, err := Modify.FindShortestPath(farm)
